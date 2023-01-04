@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
     <title>Hacer</title>
 </head>
 <body>
-<div class="linia2"></div> <!--начяло верхней линии-->
+ <!--начяло верхней линии-->
 
-<div class="start"> <!-- начяло -->   
+<div class="start"> <!-- начяло --> 
+    <div class="linia2"></div>  
 <div class="linia1"></div>
      <center><p><h1>!!!ты нащёл мой сборник---игр_приключений!!!</h1></p></center>
 
@@ -20,7 +22,28 @@
 <div class="linia1"></div> <!--начяло кантента-->
 <div class="kontent">
 
-                        <center><h4>Игры</h4></center>
+                        
+<div>
+    <center><h6>Живой поиск</h6></center>
+    <center><input type="text" class="text" id="geym_control"></center> <!--поисковая строка-->
+    <center><h6 class="mini_pading">s--------------------------------------s</h6></center>
+    <div class="linia1"></div>
+</div>
+                         <center><h6>---Игры---</h6></center>
+                         <div class="linia1"></div>
+<div>
+    <ul class="geym_control"><!--начяло показа игр-->
+        <center><p><h7><li>сабака</li></h7></p></center>
+        
+        <center><p><h7><li>бык</li></h7></p></center>
+        
+        <center><p><h7><li>кот</li></h7></p></center>
+        
+        <center><p><h7><li>папугай</li></h7></p></center>
+        
+
+    </ul>
+</div>
 
 
 
@@ -35,7 +58,7 @@
 
 <style>
     body {
-        background: #000000 url(images/bg.jpg); /* Цвет фона и путь к файлу */
+        background: #000000; /* Цвет фона и путь к файлу */
         color: rgb(255, 0, 0);} /* Цвет текста */
 a{
     color: brown;
@@ -43,21 +66,81 @@ a{
 h1{
     color: rgb(255, 0, 0);
 }
-
+h6{
+    color: brown;
+}
+h4{
+    color: brown;
+}
+p {
+	margin: 0;
+	padding: 4 4 4px 4; /*Отступ 10px снизу*/
+}
 div.linia1{
+min-width: 600px;
 width: auto;
+width: 10000;
 height: 5px;
 background-color: rgb(237, 0, 0);
+
 }
 div.linia2{
 float:right;
 width: 5px;
-min-height: 600px;
+min-height: 10px;
 height: auto;
 height: 6000px;
 background-color: rgb(237, 0, 0);  
 }
+input.text {
+    width:  600px;
+    height: 18px;
+    padding: 5px 15px 5px 15px;
+    border:5px brown;
+    font-size:16px;
+    font-family: Tahoma;
+    text-align: center;
+}
+h6.mini_pading{
+    margin: 0;
+	padding: 0 0 0px 0; /*Отступ 10px снизу*/
+}
+.geym_control li.hide {
+    display: none;
+}
 </style>
+
+<script>
+document.querySelector('#geym_control').oninput = function(){
+    let val = this.value.trim();
+    let geym_control = document.querySelectorAll('.geym_control li');
+    if (val !=''){
+        geym_control.forEach(function(elem){
+            if (elem.innerText.search(val) == -1){
+                elem.classList.add('hide');
+                elem.innerHTML = elem.innerText;
+            }
+            else{
+                elem.classList.remove('hide');
+                let str = elem.innerText;
+                elem.innerHTML = insertMark(str,elem.innerText.search(val), val.length);
+            }
+ 
+        });
+    }
+    else{
+     geym_control.forEach(function(elem){
+         elem.classList.remove('hide');
+         elem.innerHTML = elem.innerText;
+        })
+    }
+}
+
+function insertMark(string, pos, len){
+    return string.slice(0, pos)+'<mark>'+string.slice(pos, pos+len)+'</mark>'+string.slice(pos+len);
+
+}
+</script>
 
 
 </body>
